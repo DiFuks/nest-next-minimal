@@ -1,7 +1,19 @@
 import { NextPage } from 'next';
+import Head from 'next/head';
 
-const Index: NextPage = () => (
-  <div>Hello world</div>
+import { IIndexPageResponse } from '../../dto/IIndexPageResponse';
+
+const Index: NextPage<IIndexPageResponse> = ({ title, content }) => (
+  <>
+    <Head>
+      <title>{title}</title>
+    </Head>
+    {content}
+  </>
 );
+
+Index.getInitialProps = ({ query }) => {
+  return query as unknown as IIndexPageResponse;
+}
 
 export { Index as default };

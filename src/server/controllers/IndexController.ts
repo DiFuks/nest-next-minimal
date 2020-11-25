@@ -1,9 +1,14 @@
-import { Controller, Get, UseInterceptors } from '@nestjs/common';
-import { FormatResponse } from '@server/interceptors/FormatResponse';
+import { Controller, Get, Render } from '@nestjs/common';
+import { IIndexPageResponse } from '../../dto/IIndexPageResponse';
 
 @Controller()
 export class IndexController {
   @Get('/')
-  @UseInterceptors(new FormatResponse('Index'))
-  public get(): void {}
+  @Render('Index')
+  public get(): IIndexPageResponse {
+    return {
+      title: 'Index page',
+      content: 'Hello world',
+    }
+  }
 }
